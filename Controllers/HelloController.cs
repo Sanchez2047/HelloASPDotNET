@@ -9,26 +9,53 @@ namespace HelloASPDotNET.Controllers
     [Route("/helloworld")]
     public class HelloController : Controller
     {
-        // GET: /<controrller>/
+
         [HttpGet]
-        public IActionResult Index()
+
+        public IActionResult CreateMessage()
         {
-            string html="<form method='post' action='/helloworld/'>"+
-                "<input type='text' name='name' />"+
-                "<input type='submit' value='Greet Me!' />"+
+            string html = "<form method='post'>" +
+                "<input type='text' name='name' />" +
+                "<select name='lang'>" +
+                    "<option value=''>* Select One *</option>" +
+                    "<option value='English'>English</option>" +
+                    "<option value='Spanish'>Spanish</option>" +
+                    "<option value='French'>French</option>" +
+                    "<option value='German'>German</option>" +
+                    "<option value='Japense'>Japense</option>" +
+                "<input type='submit' value='Greet Me'/>" +
                 "</form>";
+
             return Content(html, "text/html");
         }
 
-        // GET: /hello/welcome
-        //[HttpGet]
-        //[Route("/helloworld/welcome/{name?}")]
-
-        [HttpGet("welcome/{name?}")]
         [HttpPost]
-        public IActionResult Welcome(string name = "World")
+        public IActionResult Welcome(string name = "World", string lang = "English")
         {
-            return Content("<h1>Welcome to my app, " + name + "!</h1>", "text/html");
+            if (lang == "English")
+            {
+                return Content("<h1>Hello " + name + "!</h1>", "text/html");
+            }
+            else if (lang == "Spanish")
+            {
+                return Content("<h1>Hola " + name +"!</h1>", "text/html");
+            }
+            else if(lang == "French")
+            {
+                return Content("<h1>Bonjour " + name + "!</h1>", "text/html");
+            }
+            else if(lang == "German")
+            {
+                return Content("<h1>Hallo " + name + "!</h1>", "text/html");
+            }
+            else if (lang == "Japense")
+            {
+                return Content("<h1>Kon'nichiwa " + name + "!</h1>", "text/html");
+            }
+            else
+            {
+                return Content("<h1>Hello " + name + "!</h1>", "text/html");
+            }
         }
     }
 }
